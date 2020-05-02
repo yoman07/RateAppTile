@@ -27,3 +27,4 @@ yoman07, roman.barzyczak@gmail.com
 ## License
 
 RateAppTile is available under the MIT license. See the LICENSE file for more info.
+# RateAppTile
