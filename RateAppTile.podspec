@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'RateAppTile'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of RateAppTile.'
+  s.summary          = 'Gather AppStore reviews & feeback from users not only ratings.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -26,9 +26,9 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'yoman07' => 'roman.barzyczak@gmail.com' }
   s.source           = { :git => 'https://github.com/yoman07/RateAppTile.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/roman_barzyczak'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'RateAppTile/Classes/**/*'
   
@@ -37,6 +37,6 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.frameworks = 'UIKit', 'MessageUI', 'MessageUI', 'StoreKit'
+    s.dependency 'SVProgressHUD', '~> 2.2.5'
 end

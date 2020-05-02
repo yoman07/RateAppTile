@@ -1,0 +1,6 @@
+framework module Pods_RateAppTile_Example {
+  umbrella header "Pods-RateAppTile_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  RateAppTile
-//
-//  Created by yoman07 on 05/02/2020.
-//  Copyright (c) 2020 yoman07. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
