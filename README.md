@@ -19,6 +19,10 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'RateAppTile'
 ```
+## Screenshots
+![image](https://i.postimg.cc/f3HwtK14/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-00-38.png)
+![image](https://i.postimg.cc/k6zqw5nf/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-00-40.png)
+![image](https://i.postimg.cc/m19RnGkR/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-01-54.png)
 
 ## Author
 
