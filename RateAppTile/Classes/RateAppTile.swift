@@ -6,12 +6,17 @@ public typealias OnPromptAboutRating = () -> Void
 
 @IBDesignable public class RateAppTile: UIView {
     
-    public var isDebug: Bool = false
+    public var isDebug: Bool = false {
+        didSet {
+            rateAppTileController.isDebug = isDebug
+        }
+    }
     /**
             Config for rate
      */
     public var rateAppData: RateAppData? {
         didSet {
+            rateAppTileController.rateAppData = rateAppData
             refreshView()
         }
     }
@@ -29,7 +34,11 @@ public typealias OnPromptAboutRating = () -> Void
     /**
                 Rate app configuration
      */
-    public var rateAppConfig: RateAppConfig = RateAppConfig()
+    public var rateAppConfig: RateAppConfig = RateAppConfig() {
+        didSet {
+            rateAppTileController.rateAppConfig = rateAppConfig
+        }
+    }
 
     
     public var mode: Mode = .like {
@@ -41,7 +50,7 @@ public typealias OnPromptAboutRating = () -> Void
     var isFromStoryboard: Bool = false
     
     private weak var presentController: UIViewController?
-
+    private var rateAppTileController: RateAppTileController = RateAppTileController(userDefaults: UserDefaults.standard)
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -80,6 +89,7 @@ public typealias OnPromptAboutRating = () -> Void
             UserDefaults.standard.set(false, forKey: rateAppConfig.isUserLikeAppKey)
         case .rate:
             onUserTap?(RateAppUserAction.writeNegative)
+            UserDefaults.standard.set(true, forKey: rateAppConfig.clickedNoOnRateAppKey)
             hideRateAppTile()
         case .feedback:
             onUserTap?(RateAppUserAction.feedbackNegative)
@@ -119,53 +129,27 @@ public typealias OnPromptAboutRating = () -> Void
         }
     }
     
-    private var currentAppVersion: String {
-        // Get the current bundle version for the app
-        let infoDictionaryKey = kCFBundleVersionKey as String
-        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
-            else { fatalError("Expected to find a bundle version in the info dictionary") }
-        
-        return currentVersion
-    }
     public func showIfPossible(from viewController: UIViewController) {
         self.presentController = viewController
-        // If the count has not yet been stored, this will return 0
-        var count = UserDefaults.standard.integer(forKey: rateAppConfig.numberOfLaunchesDefaultsKey)
         
-        if rateAppConfig.shouldCountLaunches {
-            count += 1
-            UserDefaults.standard.set(count, forKey: rateAppConfig.numberOfLaunchesDefaultsKey)
-        }
-        
-        let isRateAppDisplayed = UserDefaults.standard.bool(forKey: rateAppConfig.rateAppTileDisplayed)
-        let isUserLikeApp = UserDefaults.standard.bool(forKey: rateAppConfig.isUserLikeAppKey)
-
-        
-        if isDebug || (!isRateAppDisplayed && count >= rateAppConfig.numberOfLaunches) {
-            showRateAppTile()
-            UserDefaults.standard.set(true, forKey: rateAppConfig.rateAppTileDisplayed)
-        } else if (isUserLikeApp && count >= rateAppConfig.numberOfLaunches + rateAppConfig.daysAfterClickLike) {
+        switch rateAppTileController.nextAction {
+        case .showRateApp:
             showStoreReview()
+        case .showRateTile:
+            showRateAppTile()
+        default: break
         }
     }
     
     private func showStoreReview() {
         let numberOfSecondsFromLaunch = DispatchTime.now() + rateAppConfig.numberOfSecondsFromLaunch
-        let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: rateAppConfig.lastVersionPromptedForReviewKey)
 
-        if (lastVersionPromptedForReview != nil) && lastVersionPromptedForReview == currentAppVersion {
-            return
-        }
         onPromptAboutRating?()
         
-        DispatchQueue.main.asyncAfter(deadline: numberOfSecondsFromLaunch) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: numberOfSecondsFromLaunch) {
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
-            guard let unownedSelf = self else {
-                return
-            }
-            UserDefaults.standard.set(unownedSelf.currentAppVersion, forKey: unownedSelf.rateAppConfig.lastVersionPromptedForReviewKey)
         }
     }
     

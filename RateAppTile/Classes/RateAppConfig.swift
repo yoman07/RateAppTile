@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RateAppConfig {
+public class RateAppConfig {
     public var numberOfDays = 10
     public var numberOfLaunches = 15
     public var numberOfSecondsFromLaunch = 15.0
@@ -12,7 +12,9 @@ public struct RateAppConfig {
     public var lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     public var rateAppTileDisplayed = "rateAppTileDisplayedKey"
     public var isUserLikeAppKey = "isUserLikeAppKey"
-
+    public var clickedNoOnRateAppKey = "clickedNoOnRateAppKey"
+    public var showedRateAppOnCountKey = "showedRateAppOnCountKey"
+    
     public var shouldCountLaunches: Bool = true
     public var supportMessageBody = ""
     public var feedbackSubject = "Feedback about App"
