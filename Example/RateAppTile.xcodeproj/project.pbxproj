@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		39FA986B245D93AB008E44A2 /* RateAppTileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA9869245D9373008E44A2 /* RateAppTileSpec.swift */; };
+		39FA9875245DDC28008E44A2 /* RateAppTileControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA9873245DDAF5008E44A2 /* RateAppTileControllerSpec.swift */; };
 		3DB19C5F701543EF09A82178 /* Pods_RateAppTile_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8FB58815F575723C24B571 /* Pods_RateAppTile_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7BD15D3D5D6DC4D2EC7CA8F4 /* Pods_RateAppTile_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD084C78C860F8B761E0D409 /* Pods_RateAppTile_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		39FA9869245D9373008E44A2 /* RateAppTileSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppTileSpec.swift; sourceTree = "<group>"; };
+		39FA9873245DDAF5008E44A2 /* RateAppTileControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppTileControllerSpec.swift; sourceTree = "<group>"; };
 		3F57AC13B0AEABF0671AFF76 /* RateAppTile.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RateAppTile.podspec; path = ../RateAppTile.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		447489D4DAB9CD863F559E4C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		478BB0D6B22FE2A3E0DF0B67 /* Pods-RateAppTile_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateAppTile_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RateAppTile_Tests/Pods-RateAppTile_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* RateAppTile_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateAppTile_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		68724FFFCBC6A3E521383F7D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9A8FB58815F575723C24B571 /* Pods_RateAppTile_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RateAppTile_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B718DD30441764FD6B99739C /* Pods-RateAppTile_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateAppTile_Tests.release.xcconfig"; path = "Target Support Files/Pods-RateAppTile_Tests/Pods-RateAppTile_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				39FA9869245D9373008E44A2 /* RateAppTileSpec.swift */,
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
+				39FA9873245DDAF5008E44A2 /* RateAppTileControllerSpec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -370,8 +370,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39FA9875245DDC28008E44A2 /* RateAppTileControllerSpec.swift in Sources */,
 				39FA986B245D93AB008E44A2 /* RateAppTileSpec.swift in Sources */,
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
