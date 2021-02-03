@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RateAppTile'
-  s.version          = '1.2.1'
+  s.version          = '1.2.2'
   s.summary          = 'Gather AppStore reviews & feeback from users not only ratings.'
-  spec.swift_version = '5.0'
+  s.swift_version = '5.0'
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
