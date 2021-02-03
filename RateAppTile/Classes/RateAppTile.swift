@@ -58,8 +58,8 @@ public typealias OnPromptAboutRating = () -> Void
     public var primaryButtonColor: UIColor? {
         didSet {
             guard let primaryButtonColor = primaryButtonColor else { return }
-            agreeButton.setBackgroundColor(color: primaryButtonColor, forUIControlState: .normal)
-            secondActionButon.setBackgroundColor(color: primaryButtonColor, forUIControlState: .normal)
+            agreeButton.setBackgroundColor(color: primaryButtonColor, forUIControlState: UIControl.State.normal)
+            secondActionButon.setBackgroundColor(color: primaryButtonColor, forUIControlState: UIControl.State.normal)
             
         }
     }
@@ -69,14 +69,14 @@ public typealias OnPromptAboutRating = () -> Void
         didSet {
             guard let disabledButtonColor = disabledButtonColor else { return }
             agreeButton.setBackgroundColor(color: disabledButtonColor,
-                                           forUIControlState: .disabled)
+                                           forUIControlState: UIControl.State.disabled)
             agreeButton.setBackgroundColor(color: disabledButtonColor,
-                                           forUIControlState: .highlighted)
+                                           forUIControlState: UIControl.State.highlighted)
             
             secondActionButon.setBackgroundColor(color: disabledButtonColor,
-                                                 forUIControlState: .disabled)
+                                                 forUIControlState: UIControl.State.disabled)
             secondActionButon.setBackgroundColor(color: disabledButtonColor,
-                                                 forUIControlState: .highlighted)
+                                                 forUIControlState: UIControl.State.highlighted)
         }
     }
     
@@ -251,7 +251,7 @@ public typealias OnPromptAboutRating = () -> Void
         }
         guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id\(appId)?action=write-review")
         else { fatalError("Expected a valid URL") }
-        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        UIApplication.shared.open(writeReviewURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     private func writeFeedback() {
@@ -297,4 +297,9 @@ extension RateAppTile: UITextViewDelegate {
         return true
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
