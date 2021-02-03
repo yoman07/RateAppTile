@@ -80,6 +80,13 @@ public typealias OnPromptAboutRating = () -> Void
         }
     }
     
+    public var iconCloseImage: UIImage? {
+        didSet {
+            rejectButton.setImage(iconCloseImage,
+                                  for: UIControl.State.normal)
+        }
+    }
+    
     public var rateFullImage: UIImage? {
         didSet {
             heartsStackView.subviews.forEach { view in
