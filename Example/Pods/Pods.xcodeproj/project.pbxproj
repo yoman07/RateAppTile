@@ -39,6 +39,8 @@
 		34B68781036EC58ADA6F6EF3A2E28E20 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F29A25740F1E380FDF47DE92567128 /* SVProgressAnimatedView.m */; };
 		3722B93E1E8BF31C11CDF45AA815A767 /* QuickTestSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D7E52D5EF20DA7685E17C39B16CF1 /* QuickTestSuite.swift */; };
 		38B72051F26368B657ACE1CDEA474D88 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 3459109DB6CF1AE6D5BFBF87EA18173C /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
+		39223B4925CB28FA0056DDFD /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39223B4825CB28FA0056DDFD /* UIButton+Color.swift */; };
+		39CA21EE25CA89740032F90D /* UITextField+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CA21ED25CA89740032F90D /* UITextField+Placeholder.swift */; };
 		39FA986E245D9B66008E44A2 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 39FA986D245D9B66008E44A2 /* .gitkeep */; };
 		39FA9870245D9B75008E44A2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39FA986F245D9B75008E44A2 /* Media.xcassets */; };
 		39FA9872245DD7C6008E44A2 /* RateAppTileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA9871245DD7C6008E44A2 /* RateAppTileController.swift */; };
@@ -312,7 +314,9 @@
 		381289DF509A7935FC4BF6941AB010CD /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		383F0F15ED8543D6B8A14A6A23F98E03 /* FBSnapshotTestCase-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCase-Info.plist"; sourceTree = "<group>"; };
 		3915551797454B00310A65F65E2A1F60 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		39223B4825CB28FA0056DDFD /* UIButton+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
 		3981A81B625516034D82F06A7510B926 /* Nimble.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Nimble.h; path = Sources/Nimble/Nimble.h; sourceTree = "<group>"; };
+		39CA21ED25CA89740032F90D /* UITextField+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Placeholder.swift"; sourceTree = "<group>"; };
 		39FA986D245D9B66008E44A2 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		39FA986F245D9B75008E44A2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		39FA9871245DD7C6008E44A2 /* RateAppTileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppTileController.swift; sourceTree = "<group>"; };
@@ -766,12 +770,14 @@
 				8C5567299DBE8AEB3102C884EF56BCAA /* EmailContactController.swift */,
 				A9BDB9FE353E79B58C6A105925598B2F /* RateAppConfig.swift */,
 				A7516223C698FC16BD30AE8D276D0EA7 /* RateAppData.swift */,
-				94C610F87BDBD77BB5175C8B974D4CEA /* RateAppTile.swift */,
 				67EBCEEEF5809F42B8CDB4A87185F8A8 /* RateAppTile.xib */,
+				94C610F87BDBD77BB5175C8B974D4CEA /* RateAppTile.swift */,
 				AFE716B3F49EE9F9E08CC2883B8E2FCC /* RateAppTileContainer.swift */,
 				FFE194DAE2CC8B4E7F2BBD10933A07F1 /* RateAppUserAction.swift */,
 				90EF0FB3B1642089196F64B783F3799E /* Pod */,
 				13A88851F58B29AC223CF476631A496F /* Support Files */,
+				39CA21ED25CA89740032F90D /* UITextField+Placeholder.swift */,
+				39223B4825CB28FA0056DDFD /* UIButton+Color.swift */,
 			);
 			name = RateAppTile;
 			path = ../..;
@@ -1548,6 +1554,8 @@
 				403BC1AFBD02AFD74B6191DF7CC381B1 /* RateAppTile.xib in Sources */,
 				3CFB38769B04951F119A0B0C8AC2770E /* RateAppTileContainer.swift in Sources */,
 				7D847016E2550D322AA14312D04F5654 /* RateAppUserAction.swift in Sources */,
+				39CA21EE25CA89740032F90D /* UITextField+Placeholder.swift in Sources */,
+				39223B4925CB28FA0056DDFD /* UIButton+Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
