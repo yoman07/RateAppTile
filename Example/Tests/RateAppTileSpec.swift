@@ -12,20 +12,8 @@ class RateAppTileSpec: QuickSpec {
             beforeEach {
                 view = RateAppTile.loadViewFromNib()
                 let appStoreConfig = RateAppStoreConfig(appId: 100, supportEmail: "mock@mock.com")
-                
-                let likeTileText = TileText(titleText: "Snapshot like title",
-                                            positiveButtonText: "Like positive",
-                                            negativeButtonText: "Like Negative")
-                let writeReviewText = TileText(titleText: "Write Review title",
-                                               positiveButtonText: "Write Review positive",
-                                               negativeButtonText: "Write Review Negative")
-                let feedbackText = TileText(titleText: "Feedback title",
-                                            positiveButtonText: "Feedback positive",
-                                            negativeButtonText: "Feedback Negative")
-                view?.rateAppData = RateAppData(rateAppStoreConfig: appStoreConfig,
-                                                likeTileTexts: likeTileText,
-                                                writeReviewTileTexts: writeReviewText,
-                                                feedbackTileTexts: feedbackText)
+         
+                view?.rateAppData = RateAppData(rateAppStoreConfig: appStoreConfig)
             }
             it("has valid view for like") {
                 view?.mode = .like

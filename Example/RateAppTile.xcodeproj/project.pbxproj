@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39223B4525CB26360056DDFD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39223B4425CB26350056DDFD /* Localizable.strings */; };
 		39FA986B245D93AB008E44A2 /* RateAppTileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA9869245D9373008E44A2 /* RateAppTileSpec.swift */; };
 		39FA9875245DDC28008E44A2 /* RateAppTileControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA9873245DDAF5008E44A2 /* RateAppTileControllerSpec.swift */; };
 		3DB19C5F701543EF09A82178 /* Pods_RateAppTile_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8FB58815F575723C24B571 /* Pods_RateAppTile_Tests.framework */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39223B4425CB26350056DDFD /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		39FA9869245D9373008E44A2 /* RateAppTileSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppTileSpec.swift; sourceTree = "<group>"; };
 		39FA9873245DDAF5008E44A2 /* RateAppTileControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppTileControllerSpec.swift; sourceTree = "<group>"; };
 		3F57AC13B0AEABF0671AFF76 /* RateAppTile.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RateAppTile.podspec; path = ../RateAppTile.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -74,6 +76,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				39223B4425CB26350056DDFD /* Localizable.strings */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for RateAppTile */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				39223B4525CB26360056DDFD /* Localizable.strings in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);

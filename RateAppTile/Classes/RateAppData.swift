@@ -24,42 +24,12 @@ public struct RateAppStoreConfig {
     }
 }
 
-public struct TileText {
-
-    let titleText: String
-    let positiveButtonText: String
-    let negativeButtonText: String
-    
-    /**
-        Init for Tile textss
-
-        - Parameter titleLikeText: Text used to display title
-        - Parameter positiveLikeText: Text display on positive button
-        - Parameter negativeLikeText: Text display on negative button
-     */
-    
-    public init(titleText: String, positiveButtonText: String, negativeButtonText: String) {
-        self.titleText = titleText
-        self.positiveButtonText = positiveButtonText
-        self.negativeButtonText = negativeButtonText
-    }
-    
-}
-
 public struct RateAppData {
     
     let rateAppStoreConfig: RateAppStoreConfig
-    let likeTileTexts: TileText
-    let writeReviewTileTexts: TileText
-    let feedbackTileTexts: TileText
+
     
-    public init(rateAppStoreConfig: RateAppStoreConfig,
-                likeTileTexts: TileText,
-                writeReviewTileTexts: TileText,
-                feedbackTileTexts: TileText) {
+    public init(rateAppStoreConfig: RateAppStoreConfig) {
         self.rateAppStoreConfig = rateAppStoreConfig
-        self.likeTileTexts = likeTileTexts
-        self.writeReviewTileTexts = writeReviewTileTexts
-        self.feedbackTileTexts = feedbackTileTexts
     }
 }

@@ -12,7 +12,7 @@ public typealias OnPromptAboutRating = () -> Void
         }
     }
     /**
-            Config for rate
+     Config for rate
      */
     public var rateAppData: RateAppData? {
         didSet {
@@ -22,24 +22,24 @@ public typealias OnPromptAboutRating = () -> Void
     }
     
     /**
-            Listener for user taps
+     Listener for user taps
      */
     public var onUserTap: OnUserTap?
     
     /**
-            Listener for user taps
+     Listener for user taps
      */
     public var onPromptAboutRating: OnPromptAboutRating?
     
     /**
-                Rate app configuration
+     Rate app configuration
      */
     public var rateAppConfig: RateAppConfig = RateAppConfig() {
         didSet {
             rateAppTileController.rateAppConfig = rateAppConfig
         }
     }
-
+    
     
     public var mode: Mode = .like {
         didSet {
@@ -57,19 +57,118 @@ public typealias OnPromptAboutRating = () -> Void
     @IBInspectable
     public var primaryButtonColor: UIColor? {
         didSet {
-            agreeButton.backgroundColor = primaryButtonColor
+            guard let primaryButtonColor = primaryButtonColor else { return }
+            agreeButton.setBackgroundColor(color: primaryButtonColor, forUIControlState: .normal)
+            secondActionButon.setBackgroundColor(color: primaryButtonColor, forUIControlState: .normal)
+            
         }
     }
     
+    @IBInspectable
+    public var disabledButtonColor: UIColor? {
+        didSet {
+            guard let disabledButtonColor = disabledButtonColor else { return }
+            agreeButton.setBackgroundColor(color: disabledButtonColor,
+                                           forUIControlState: .disabled)
+            agreeButton.setBackgroundColor(color: disabledButtonColor,
+                                           forUIControlState: .highlighted)
+            
+            secondActionButon.setBackgroundColor(color: disabledButtonColor,
+                                                 forUIControlState: .disabled)
+            secondActionButon.setBackgroundColor(color: disabledButtonColor,
+                                                 forUIControlState: .highlighted)
+        }
+    }
+    
+    public var rateFullImage: UIImage? {
+        didSet {
+            heartsStackView.subviews.forEach { view in
+                (view as? UIButton)?.setImage(rateEmptyImage, for: .selected)
+            }        }
+    }
+    
+    public var rateEmptyImage: UIImage? {
+        didSet {
+            guard let rateEmptyImage = rateEmptyImage else { return }
+            heartsStackView.subviews.forEach { view in
+                (view as? UIButton)?.setImage(rateEmptyImage, for: .normal)
+            }
+        }
+    }
+    
+    @IBOutlet weak var secondActionTitle: UILabel!
+    @IBOutlet weak var secondActionButon: UIButton!
     @IBOutlet public weak var rejectButton: UIButton!
     @IBOutlet public weak var agreeButton: UIButton!
+    @IBOutlet public weak var heartsStackView: UIStackView!
+    @IBOutlet weak var thankYouLabel: UILabel!
+    @IBOutlet weak var appstoreReviewHeightConstraint: NSLayoutConstraint!
+    var rateValue: Int?
+    
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var feedackTextView: UITextView! {
+        didSet {
+            feedackTextView.delegate = self
+            feedackTextView.setPlaceholder(NSLocalizedString("rate_app_tile_feedback_placeholder", comment: "Placeholder for feedback text"))
+            
+        }
+    }
+    
+    
+    @IBAction private func onTapRate(_ sender: UIButton) {
+        
+        let index = sender.tag
+        
+        for i in 0...index {
+            (heartsStackView.subviews[i] as? UIButton)?.isSelected = true
+            
+        }
+        
+        for i in (index + 1)..<heartsStackView.subviews.count {
+            (heartsStackView.subviews[i] as? UIButton)?.isSelected = false
+        }
+        rateValue = index
+        agreeButton.isEnabled = true
+        onUserTap?(RateAppUserAction.tapLike(value: rateValue ?? 0))
+    }
     
     @IBAction private func accept(_ sender: Any) {
+        
         switch mode {
         case .like:
-            mode = .rate
-            onUserTap?(RateAppUserAction.likePositive)
-            UserDefaults.standard.set(true, forKey: rateAppConfig.isUserLikeAppKey)
+            for i in 0..<heartsStackView.subviews.count {
+                if (heartsStackView.subviews[i] as? UIButton)?.isSelected ?? false {
+                    (heartsStackView.subviews[i] as? UIButton)?.setImage((heartsStackView.subviews[i] as? UIButton)?.image(for: .selected), for: .normal)
+                }
+                (heartsStackView.subviews[i] as? UIButton)?.isEnabled = false
+            }
+            onUserTap?(RateAppUserAction.like(value: rateValue ?? 0))
+            if rateValue == 4 {
+                thankYouLabel.text = NSLocalizedString("rate_app_title_thank_you_positive", comment: "Text that shows after user clicks max amount of hearts");
+                mode = .rate
+                UserDefaults.standard.set(true, forKey: rateAppConfig.isUserLikeAppKey)
+                secondActionTitle.text = NSLocalizedString("rate_app_tile_rate_title", comment: "Rate app title text");
+                secondActionButon.setTitle("Rate us", for: .normal)
+                UIView.animate(withDuration: 0.4, animations: { () -> Void in
+                    self.agreeButton.isHidden = true
+                    self.thankYouLabel.isHidden = false
+                    self.appstoreReviewHeightConstraint.constant = 140
+                })
+                secondActionButon.setTitle(NSLocalizedString("rate_app_tile_rate_us", comment: "Button title for rate"), for: .normal)
+            } else {
+                thankYouLabel.text = NSLocalizedString("rate_app_title_thank_you_negative",
+                                                       comment: "Text that shows after user clicks less than four hearts");
+                mode = .feedback
+                secondActionTitle.text = NSLocalizedString("rate_app_tile_feedback_title",
+                                                           comment: "Feedback title");
+                UIView.animate(withDuration: 0.4, animations: { () -> Void in
+                    self.agreeButton.isHidden = true
+                    self.thankYouLabel.isHidden = false
+                    self.appstoreReviewHeightConstraint.constant = 240
+                    self.textViewHeightConstraint.constant = 100
+                })
+                secondActionButon.setTitle(NSLocalizedString("rate_app_tile_feedback_action", comment: "Button title for feedback"), for: .normal)
+            }
         case .rate:
             requestReviewManually(appId: rateAppData?.rateAppStoreConfig.appId)
             onUserTap?(RateAppUserAction.writePositive)
@@ -79,22 +178,26 @@ public typealias OnPromptAboutRating = () -> Void
             onUserTap?(RateAppUserAction.feedbackPositive)
             hideRateAppTile()
         }
+        
+        
+        
+        
     }
     
     @IBAction private func reject(_ sender: Any) {
+        hideRateAppTile()
+        
         switch mode {
         case .like:
-            onUserTap?(RateAppUserAction.likeNegative)
-            mode = .feedback
+            onUserTap?(RateAppUserAction.closeRate)
             UserDefaults.standard.set(false, forKey: rateAppConfig.isUserLikeAppKey)
         case .rate:
-            onUserTap?(RateAppUserAction.writeNegative)
+            onUserTap?(RateAppUserAction.closeWriteReview)
             UserDefaults.standard.set(true, forKey: rateAppConfig.clickedNoOnRateAppKey)
-            hideRateAppTile()
         case .feedback:
-            onUserTap?(RateAppUserAction.feedbackNegative)
-            hideRateAppTile()
+            onUserTap?(RateAppUserAction.closeWriteFeedback)
         }
+        hideRateAppTile()
     }
     
     private func hideRateAppTile() {
@@ -112,20 +215,9 @@ public typealias OnPromptAboutRating = () -> Void
     }
     
     private func refreshView() {
-        switch mode {
-        case .like:
-            titleLabel.text = rateAppData?.likeTileTexts.titleText
-            rejectButton.setTitle(rateAppData?.likeTileTexts.negativeButtonText, for: .normal)
-            agreeButton.setTitle(rateAppData?.likeTileTexts.positiveButtonText, for: .normal)
-            
-        case .rate:
-            titleLabel.text = rateAppData?.writeReviewTileTexts.titleText
-            rejectButton.setTitle(rateAppData?.writeReviewTileTexts.negativeButtonText, for: .normal)
-            agreeButton.setTitle(rateAppData?.writeReviewTileTexts.positiveButtonText, for: .normal)
-        case .feedback:
-            titleLabel.text = rateAppData?.feedbackTileTexts.titleText
-            rejectButton.setTitle(rateAppData?.feedbackTileTexts.negativeButtonText, for: .normal)
-            agreeButton.setTitle(rateAppData?.feedbackTileTexts.positiveButtonText, for: .normal)
+        if mode == .like {
+            titleLabel.text = NSLocalizedString("rate_app_tile_like_title", comment: "Title for like question")
+            agreeButton.setTitle(NSLocalizedString("rate_app_tile_like_action", comment: "Title for like action"), for: .normal)
         }
     }
     
@@ -143,7 +235,7 @@ public typealias OnPromptAboutRating = () -> Void
     
     private func showStoreReview() {
         let numberOfSecondsFromLaunch = DispatchTime.now() + rateAppConfig.numberOfSecondsFromLaunch
-
+        
         onPromptAboutRating?()
         
         DispatchQueue.main.asyncAfter(deadline: numberOfSecondsFromLaunch) {
@@ -158,7 +250,7 @@ public typealias OnPromptAboutRating = () -> Void
             fatalError("Expected a valid appId")
         }
         guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id\(appId)?action=write-review")
-            else { fatalError("Expected a valid URL") }
+        else { fatalError("Expected a valid URL") }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
     
@@ -179,20 +271,30 @@ public typealias OnPromptAboutRating = () -> Void
             fatalError("Please set rateAppData")
         }
         return RateAppEmailContactController(email: rateAppData.rateAppStoreConfig.supportEmail,
-                                      subject: rateAppConfig.feedbackSubject,
-                                      body: rateAppConfig.supportMessageBody,
-                                      copyToClipboardText: rateAppConfig.copyToClipboardText)
+                                             subject: rateAppConfig.feedbackSubject,
+                                             body: feedackTextView.text + rateAppConfig.supportMessageBody,
+                                             copyToClipboardText: rateAppConfig.copyToClipboardText)
     }()
     
-    
     /**
-                Load View from Nib
+     
+     Load View from Nib
      */
     public static func loadViewFromNib() -> RateAppTile? {
         let bundle = Bundle(for: self)
         let nib = UINib(nibName: "RateAppTile", bundle: bundle)
         return nib.instantiate(withOwner: nil, options: nil).first {
             ($0 as? UIView)?.restorationIdentifier == "container"
-            } as? RateAppTile
+        } as? RateAppTile
     }
+}
+
+
+extension RateAppTile: UITextViewDelegate {
+    
+    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.checkPlaceholder()
+        return true
+    }
+    
 }

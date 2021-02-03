@@ -11,23 +11,16 @@ class ViewController: UIViewController {
     
     private func setupStoryboardRateAppTile() {
         let appStoreConfig = RateAppStoreConfig(appId: 1470621907, supportEmail: "mock@mock.com")
+    
+        storyboardRateAppTile.contentView?.primaryButtonColor = UIColor(red: 96.0 / 255.0,
+                                                                        green: 156.0 / 255.0,
+                                                                        blue: 244.0 / 255.0, alpha: 1.0)
         
-        let likeTileText = TileText(titleText: "Do you like our app?",
-                                    positiveButtonText: "I like it",
-                                    negativeButtonText: "No")
-        let writeReviewText = TileText(titleText: "Write Review title",
-                                       positiveButtonText: "Write review",
-                                       negativeButtonText: "No")
-        let feedbackText = TileText(titleText: "Sad to hear.Would you mind giving us some feedback so that we can do better for you?",
-                                    positiveButtonText: "Sure",
-                                    negativeButtonText: "No")
-        
-        storyboardRateAppTile.contentView?.primaryButtonColor = .red
-        storyboardRateAppTile.contentView?.rateAppData = RateAppData(rateAppStoreConfig: appStoreConfig,
-                                                                     likeTileTexts: likeTileText,
-                                                                     writeReviewTileTexts: writeReviewText,
-                                                                     feedbackTileTexts: feedbackText)
-        var rateAppConfig = RateAppConfig()
+        storyboardRateAppTile.contentView?.disabledButtonColor = UIColor(red: 179.0 / 255.0,
+                                                                         green: 214.0 / 255.0,
+                                                                         blue: 1.0, alpha: 1.0)
+        storyboardRateAppTile.contentView?.rateAppData = RateAppData(rateAppStoreConfig: appStoreConfig)
+        let rateAppConfig = RateAppConfig()
         rateAppConfig.numberOfLaunches = 0
         storyboardRateAppTile.contentView?.rateAppConfig = rateAppConfig
         storyboardRateAppTile.contentView?.onUserTap = { option in
