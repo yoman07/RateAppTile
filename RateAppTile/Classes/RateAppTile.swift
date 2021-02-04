@@ -210,6 +210,7 @@ public typealias OnPromptAboutRating = () -> Void
     
     private func hideRateAppTile() {
         feedackTextView.resignFirstResponder()
+        UserDefaults.standard.set(true, forKey: rateAppConfig.rateAppTileDisplayed)
 
         isHidden = true
         if (isFromStoryboard) {

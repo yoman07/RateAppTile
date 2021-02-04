@@ -43,7 +43,6 @@ public class RateAppTileController {
         let showedRateAppOnCount = userDefaults.integer(forKey: rateAppConfig.showedRateAppOnCountKey)
 
         if isDebug || (!isRateAppDisplayed && count >= rateAppConfig.numberOfLaunches) {
-            userDefaults.set(true, forKey: rateAppConfig.rateAppTileDisplayed)
             userDefaults.set(count, forKey: rateAppConfig.showedRateAppOnCountKey)
 
             return .showRateTile
