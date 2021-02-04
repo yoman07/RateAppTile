@@ -16,8 +16,9 @@ extension UITextView {
     }
 
     func checkPlaceholder() {
-        let placeholderLabel = self.viewWithTag(222) as! UILabel
-        placeholderLabel.removeFromSuperview()
+        if let placeholderLabel = self.viewWithTag(222) as? UILabel {
+            placeholderLabel.removeFromSuperview()
+        }
     }
 
 }

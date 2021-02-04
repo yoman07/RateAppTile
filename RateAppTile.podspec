@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RateAppTile'
-  s.version          = '1.2.3'
+  s.version          = '1.2.4'
   s.summary          = 'Gather AppStore reviews & feeback from users not only ratings.'
   s.swift_version = '5.0'
 # This description is used to generate tags and improve search results.

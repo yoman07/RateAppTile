@@ -90,7 +90,7 @@ public typealias OnPromptAboutRating = () -> Void
     public var rateFullImage: UIImage? {
         didSet {
             heartsStackView.subviews.forEach { view in
-                (view as? UIButton)?.setImage(rateEmptyImage, for: .selected)
+                (view as? UIButton)?.setImage(rateFullImage, for: .selected)
             }        }
     }
     
@@ -149,18 +149,18 @@ public typealias OnPromptAboutRating = () -> Void
                 }
                 (heartsStackView.subviews[i] as? UIButton)?.isEnabled = false
             }
-            onUserTap?(RateAppUserAction.like(value: rateValue ?? 0))
             if rateValue == 4 {
                 thankYouLabel.text = NSLocalizedString("rate_app_title_thank_you_positive", comment: "Text that shows after user clicks max amount of hearts");
                 mode = .rate
                 UserDefaults.standard.set(true, forKey: rateAppConfig.isUserLikeAppKey)
                 secondActionTitle.text = NSLocalizedString("rate_app_tile_rate_title", comment: "Rate app title text");
                 secondActionButon.setTitle("Rate us", for: .normal)
-                UIView.animate(withDuration: 0.4, animations: { () -> Void in
-                    self.agreeButton.isHidden = true
-                    self.thankYouLabel.isHidden = false
-                    self.appstoreReviewHeightConstraint.constant = 140
-                })
+                
+                self.agreeButton.isHidden = true
+                self.thankYouLabel.isHidden = false
+                self.appstoreReviewHeightConstraint.constant = 140
+                self.onUserTap?(RateAppUserAction.like(value: self.rateValue ?? 0))
+
                 secondActionButon.setTitle(NSLocalizedString("rate_app_tile_rate_us", comment: "Button title for rate"), for: .normal)
             } else {
                 thankYouLabel.text = NSLocalizedString("rate_app_title_thank_you_negative",
@@ -168,13 +168,14 @@ public typealias OnPromptAboutRating = () -> Void
                 mode = .feedback
                 secondActionTitle.text = NSLocalizedString("rate_app_tile_feedback_title",
                                                            comment: "Feedback title");
-                UIView.animate(withDuration: 0.4, animations: { () -> Void in
-                    self.agreeButton.isHidden = true
-                    self.thankYouLabel.isHidden = false
-                    self.appstoreReviewHeightConstraint.constant = 240
-                    self.textViewHeightConstraint.constant = 100
-                })
+                
+                self.agreeButton.isHidden = true
+                self.thankYouLabel.isHidden = false
+                self.appstoreReviewHeightConstraint.constant = 240
+                self.textViewHeightConstraint.constant = 100
+                self.onUserTap?(RateAppUserAction.like(value: self.rateValue ?? 0))
                 secondActionButon.setTitle(NSLocalizedString("rate_app_tile_feedback_action", comment: "Button title for feedback"), for: .normal)
+                feedackTextView.becomeFirstResponder()
             }
         case .rate:
             requestReviewManually(appId: rateAppData?.rateAppStoreConfig.appId)
@@ -208,6 +209,8 @@ public typealias OnPromptAboutRating = () -> Void
     }
     
     private func hideRateAppTile() {
+        feedackTextView.resignFirstResponder()
+
         isHidden = true
         if (isFromStoryboard) {
             superview?.isHidden = true
@@ -299,14 +302,13 @@ public typealias OnPromptAboutRating = () -> Void
 
 extension RateAppTile: UITextViewDelegate {
     
-    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    public func textViewDidChange(_ textView: UITextView) {
         textView.checkPlaceholder()
-        return true
     }
     
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
