@@ -180,7 +180,7 @@ public typealias OnPromptAboutRating = () -> Void
             }
         case .rate:
             requestReviewManually(appId: rateAppData?.rateAppStoreConfig.appId)
-            onUserTap?(RateAppUserAction.writePositive)
+            onUserTap?(RateAppUserAction.writePositive(value: feedackTextView.text))
             hideRateAppTile()
         case .feedback:
             writeFeedback()
