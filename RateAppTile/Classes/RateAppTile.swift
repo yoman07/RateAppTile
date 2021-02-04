@@ -140,7 +140,8 @@ public typealias OnPromptAboutRating = () -> Void
     }
     
     @IBAction private func accept(_ sender: Any) {
-        
+        UserDefaults.standard.set(true, forKey: rateAppConfig.rateAppTileDisplayed)
+
         switch mode {
         case .like:
             for i in 0..<heartsStackView.subviews.count {
