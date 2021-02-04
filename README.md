@@ -20,9 +20,56 @@ it, simply add the following line to your Podfile:
 pod 'RateAppTile'
 ```
 ## Screenshots
-![image](https://i.postimg.cc/f3HwtK14/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-00-38.png)
-![image](https://i.postimg.cc/k6zqw5nf/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-00-40.png)
-![image](https://i.postimg.cc/m19RnGkR/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2020-05-02-at-15-01-54.png)
+[![like.png](https://i.postimg.cc/sxsfjZ18/like.png)](https://postimg.cc/TLNvQ1Vq)
+[![review.png](https://i.postimg.cc/V6jLPFsn/review.png)](https://postimg.cc/LY8MzL18)
+[![feedback.png](https://i.postimg.cc/YCsS69yG/feedback.png)](https://postimg.cc/87LDD1GN)
+
+## How to use
+
+Setup app like in example:
+
+```
+     let appId = 123456 //your app id
+     let appStoreConfig = RateAppStoreConfig(appId: appId, supportEmail: "mock@mock.com")
+    
+        storyboardRateAppTile.contentView?.primaryButtonColor = UIColor(red: 96.0 / 255.0,
+                                                                        green: 156.0 / 255.0,
+                                                                        blue: 244.0 / 255.0, alpha: 1.0)
+        
+        storyboardRateAppTile.contentView?.disabledButtonColor = UIColor(red: 179.0 / 255.0,
+                                                                         green: 214.0 / 255.0,
+                                                                         blue: 1.0, alpha: 1.0)
+                                                                         
+        storyboardRateAppTile.contentView?.rateEmptyImage = UIImage(named: "iconHeartEmpty")
+        storyboardRateAppTile.contentView?.rateFullImage = UIImage(named: "iconHeartFeedbackr")
+        storyboardRateAppTile.contentView?.iconCloseImage = UIImage(named: "iconClose")                                                                 
+                                                                         
+        storyboardRateAppTile.contentView?.rateAppData = RateAppData(rateAppStoreConfig: appStoreConfig)
+        let rateAppConfig = RateAppConfig()
+        rateAppConfig.numberOfLaunches = 0
+        storyboardRateAppTile.contentView?.rateAppConfig = rateAppConfig
+        storyboardRateAppTile.contentView?.onUserTap = { option in
+            print("On rate app", option)
+        }
+        storyboardRateAppTile.contentView?.isDebug = true //disable it for release
+        storyboardRateAppTile.contentView?.showIfPossible(from: self)
+```
+
+## Translations
+
+Please add it to `Localizable.strings`
+
+```
+"rate_app_tile_feedback_placeholder" = "Leave few words here…";
+"rate_app_tile_rate_title" = "If so, we’d really appreciate your 5 stars feedback on Appstore!";
+"rate_app_tile_feedback_title" = "What we can do better?";
+"rate_app_tile_feedback_action" = "Done";
+"rate_app_tile_like_title" = "How likely are you to recommend this app to your friend?";
+"rate_app_tile_like_action" = "Save";
+"rate_app_title_thank_you_positive" = "Awesome! 🎉";
+"rate_app_title_thank_you_negative" = "Thank you! 💗";
+"rate_app_tile_rate_us" = "Rate us!";
+```
 
 ## Author
 
