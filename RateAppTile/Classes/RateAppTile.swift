@@ -184,7 +184,7 @@ public typealias OnPromptAboutRating = () -> Void
             hideRateAppTile()
         case .feedback:
             writeFeedback()
-            onUserTap?(RateAppUserAction.feedbackPositive)
+            onUserTap?(RateAppUserAction.feedbackPositive(value: feedackTextView.text))
             hideRateAppTile()
         }
         
