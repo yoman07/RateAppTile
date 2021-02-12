@@ -204,7 +204,7 @@ public typealias OnPromptAboutRating = () -> Void
             onUserTap?(RateAppUserAction.closeWriteReview)
             UserDefaults.standard.set(true, forKey: rateAppConfig.clickedNoOnRateAppKey)
         case .feedback:
-            onUserTap?(RateAppUserAction.closeWriteFeedback)
+            onUserTap?(RateAppUserAction.closeWriteFeedback(value: feedackTextView.text))
         }
         hideRateAppTile()
     }
